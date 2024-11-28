@@ -12,12 +12,22 @@ export interface ICard {
 
 export interface IPlace {
 	isOrdered: boolean;
-	placeInBasket: () => void;
-	removeFromBasket: () => void;
 }
 
 export type ICardItem = ICard & IPlace;
 
+export interface IBasket {
+	list: HTMLElement[];
+	price: number;
+}
+
+export type IBasketItem = Pick<ICardItem, 'id' | 'title' | 'price'>;
+
+export interface IBasketView {
+	items: HTMLElement[];
+	price: number;
+	selected: string[];
+}
 
 export type CashType = 'cash' | 'card' | null;
 
@@ -27,6 +37,11 @@ export interface IOrder {
 	email: string;
 	phone: string;
   items: string;
+}
+
+export type IOderResult = {
+  id: string;
+  total: number;
 }
 
 export interface IPage {
@@ -47,20 +62,15 @@ export type FormState = {
 	errors: string[];
 }
 
-export type TOrderResult = {
-  id: string;
-  total: number;
-}
-
-export interface IBasket {
-	list: HTMLElement[];
-	price: number;
+export type Modal = {
+	content: HTMLElement;
 }
 
 export interface IAppState {
 	catalog: ICardItem[];
 	basket: ICardItem[];
-	order: ICardItem;
+	order: IOrder;
+	orderResponse: IOderResult | null;
 	preview: ICardItem;
 	isLotInBasket(item: ICardItem): boolean;
 	clearBasket(): void;
@@ -68,4 +78,7 @@ export interface IAppState {
 	getBasketIds(): number;
 	getBasketLength(): number;
 	initOrder(): IOrder;
+  openModal(content: HTMLElement): void;
+  closeModal(): void 
+  setContent(content: HTMLElement): void; 
 }
