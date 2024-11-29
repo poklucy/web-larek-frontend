@@ -53,17 +53,10 @@ Web-Larek — это веб-приложение, предназначенное
    - IAppState
 
 2. ПРЕДСТАВЛЕНИЯ (View):
-  - ICard
-   - ICardItem
-   - IBasket
-   - IBasketItem
-   - IOrder
-   - IOderResult
    - IBasketView
-   - IPage
-   - IPageElements
-   - Modal
-   - FormState
+   -  ModalView
+   -  FormOrderView
+ 
 
 Взаимодействие между моделями и представлениями организуется с помощью событий через EventEmitter.
 
