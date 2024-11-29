@@ -62,23 +62,27 @@ export type FormState = {
 	errors: string[];
 }
 
-export type Modal = {
-	content: HTMLElement;
-}
-
 export interface IAppState {
 	catalog: ICardItem[];
 	basket: ICardItem[];
 	order: IOrder;
 	orderResponse: IOderResult | null;
 	preview: ICardItem;
-	isLotInBasket(item: ICardItem): boolean;
+	addToBasket(item: ICardItem): void
+	removeFromBasket(itemId: number): void
 	clearBasket(): void;
+	isLotInBasket(item: ICardItem): boolean;
 	getTotalAmount(): number;
 	getBasketIds(): number;
 	getBasketLength(): number;
-	initOrder(): IOrder;
-  openModal(content: HTMLElement): void;
-  closeModal(): void 
-  setContent(content: HTMLElement): void; 
+	saveOrder(orderData: IOrder): void 
+	clearOrder(): void 
+}
+
+export interface ModalView{
+	 content: HTMLElement;
+	 open(content: HTMLElement): void ;
+	 close(): void;
+	 setContent(content: HTMLElement): void;
+	 clearContent(): void;
 }
