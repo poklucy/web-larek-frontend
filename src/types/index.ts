@@ -17,17 +17,18 @@ export interface IPlace {
 export type ICardItem = ICard & IPlace;
 
 export interface IBasket {
-	list: HTMLElement[];
-	price: number;
+  list: IBasketItem[]; 
+  price: number;
 }
 
 export type IBasketItem = Pick<ICardItem, 'id' | 'title' | 'price'>;
 
 export interface IBasketView {
-	items: HTMLElement[];
-	price: number;
-	selected: string[];
+  render(items: IBasketItem[], total: number): void;
+  updateItem(itemId: string, selected: boolean): void;
+  clearView(): void;
 }
+
 
 export type CashType = 'cash' | 'card' | null;
 
@@ -36,12 +37,7 @@ export interface IOrder {
 	address: string;
 	email: string;
 	phone: string;
-  items: string;
-}
-
-export type IOderResult = {
-  id: string;
-  total: number;
+  items: string[];
 }
 
 export interface IPage {
@@ -57,16 +53,10 @@ export interface IPageElements {
 	store: HTMLElement;
 }
 
-export type FormState = {
-	valid: boolean;
-	errors: string[];
-}
-
 export interface IAppState {
 	catalog: ICardItem[];
 	basket: ICardItem[];
 	order: IOrder;
-	orderResponse: IOderResult | null;
 	preview: ICardItem;
 	addToBasket(item: ICardItem): void
 	removeFromBasket(itemId: number): void
@@ -74,15 +64,26 @@ export interface IAppState {
 	isLotInBasket(item: ICardItem): boolean;
 	getTotalAmount(): number;
 	getBasketIds(): number;
-	getBasketLength(): number;
-	saveOrder(orderData: IOrder): void 
-	clearOrder(): void 
+	getBasketLength(): number[];
+	clearOrder(): void;
+	updateFormState(valid: boolean, errors: string[]): void
 }
 
 export interface ModalView{
 	 content: HTMLElement;
 	 open(content: HTMLElement): void ;
 	 close(): void;
-	 setContent(content: HTMLElement): void;
 	 clearContent(): void;
+}
+
+export interface FormOrderView {
+	formContainer: HTMLElement ;
+	inputs: { [key: string]: HTMLInputElement };
+	errorsContainer: HTMLElement;
+	renderForm(orderData?: IOrder): void; 
+	updateErrors(errors: string[]): void;
+	clearForm(): void;
+	getFormData(): IOrder;
+	disableForm(): void;
+	enableForm(): void
 }
