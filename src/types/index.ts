@@ -6,7 +6,7 @@ export interface ICard {
   description: string;
   image: string;
   category: CategoryType;
-  price: number | null; 
+  price: number | null;
   selected: boolean;
 }
 
@@ -17,7 +17,7 @@ export interface IPlace {
 export type ICardItem = ICard & IPlace;
 
 export interface IBasket {
-  list: IBasketItem[]; 
+  list: IBasketItem[];
   price: number;
 }
 
@@ -31,6 +31,11 @@ export interface IBasketView {
 
 
 export type CashType = 'cash' | 'card' | null;
+
+export type OrderEntity = {
+	field: string
+	value: string
+}
 
 export interface IOrder {
 	payment: CashType;
@@ -80,10 +85,17 @@ export interface FormOrderView {
 	formContainer: HTMLElement ;
 	inputs: { [key: string]: HTMLInputElement };
 	errorsContainer: HTMLElement;
-	renderForm(orderData?: IOrder): void; 
+	renderForm(orderData?: IOrder): void;
 	updateErrors(errors: string[]): void;
 	clearForm(): void;
 	getFormData(): IOrder;
 	disableForm(): void;
 	enableForm(): void
 }
+
+export type OrderResult = {
+	id: string;
+	total: number;
+}
+
+export type FormError = Partial<Record<keyof IOrder, string>>
