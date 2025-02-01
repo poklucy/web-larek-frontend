@@ -57,8 +57,8 @@ export class FormModel implements IFormModel {
 	formErrors: IFormModel['formErrors'] = {}
 	
 	_addressRegExp = /^[а-яА-Яё0-9]{7,}$/
-	_emailRegExp = /^[a-z0-9]+@(mail|yandex|gmail)\.(ru|com)+$/
-	_phoneRegExp = /^(8|\+7)-\d{3}-\d{3}-\d{2}-\d{2}$/g
+	_emailRegExp = /^[a-z0-9]+@[a-z0-9]+\.[a-z]+$/
+	_phoneRegExp = /^(8|\+7)\d{10}$/g
 	_errorMessages: ErrorFieldValues = INITIAL_ERROR_VALUES
 	
 	constructor(protected events: IEvents) {}

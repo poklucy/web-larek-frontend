@@ -46,12 +46,14 @@ export class BasketModel implements IBasketModel {
 	}
 	
 	deleteCardFromBasket(deletedCard: ICard): void {
-		this.cardsList = this.cardsList.filter((card: ICard) => card !== deletedCard);
-	}
+    const index = this.cardsList.findIndex((card: ICard) => card === deletedCard);
+    if (index > -1) {
+      this.cardsList.splice(index, 1);
+    }
+  }
 	
 	clearBasket(): void {
 		this.cardsList = [];
 	}
-	
 	
 }

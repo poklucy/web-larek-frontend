@@ -31,5 +31,4 @@ export class WebLarekApiModel extends Api implements IWebLarekApiModel {
 	postOrder(order: IOrder): Promise<OrderResult> {
 		return this.post('/order', order,).then((response: OrderResult) => response)
 	}
-	
 }
