@@ -68,7 +68,6 @@ export class BasketView implements IBasket {
 	}
 	
 	render(): HTMLElement {
-		this.title.textContent = 'Корзина';
 		return this.ctx;
 	}
 }
